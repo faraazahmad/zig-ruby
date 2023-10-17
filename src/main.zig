@@ -1,18 +1,17 @@
 const std = @import("std");
-const ruby = @cImport(@cInclude("ext/prism/prism.h"));
+// const process = std.process;
 
-fn rb_return_nil(...) callconv(.C) ruby.VALUE {
-    return ruby.Qnil;
-}
+fn rb_insns(_: []u8) void {}
 
-pub fn main() !void {
+pub fn main() !u8 {
     const stdout = std.io.getStdOut().writer();
+    const argv = std.os.argv;
 
-    // var someClass = ruby.rb_define_class("ZigRb", ruby.rb_cObject);
-    var module = ruby.rb_define_module("SomeModule");
-    ruby.rb_define_method(module, "return_nil", rb_return_nil, 0);
+    if (argv.len < 2) {
+        try stdout.print("No file provided", .{});
+        return 1;
+    }
 
-    try stdout.print("Hello Ruby: {}\n", .{0});
+    try stdout.print("hello: {s}\n", .{argv[1]});
+    return 0;
 }
-
-test "simple test" {}

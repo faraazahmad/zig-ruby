@@ -16,21 +16,13 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
 
     const exe = b.addExecutable(.{
-        .name = "yarvz",
+        .name = "zig-ruby",
         // In this case the main source file is merely a path, however, in more
         // complicated build scripts, this could be a generated file.
         .root_source_file = .{ .path = "src/main.zig" },
         .target = target,
         .optimize = optimize,
     });
-
-    // Add IncludePaths for Ruby lib
-    var ruby_libdir = std.os.getenv("RUBY_LIBDIR") orelse "";
-    exe.addLibraryPath(.{ .path = ruby_libdir });
-    var ruby_hdrdir = std.os.getenv("RUBY_HDRDIR") orelse "";
-    exe.addIncludePath(.{ .path = ruby_hdrdir });
-    var ruby_archhdrdir = std.os.getenv("RUBY_ARCHHDRDIR") orelse "";
-    exe.addIncludePath(.{ .path = ruby_archhdrdir });
 
     exe.linkSystemLibrary("c");
 
