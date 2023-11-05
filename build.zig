@@ -25,6 +25,8 @@ pub fn build(b: *std.Build) void {
     });
 
     exe.linkSystemLibrary("c");
+    exe.addIncludePath(.{ .path = "build/prism/include" });
+    exe.addObjectFile(.{ .path = "build/librubyparser.a" });
 
     // This declares intent for the executable to be installed into the
     // standard location when the user invokes the "install" step (the default
