@@ -1,2 +1,3 @@
-build/
-zig-cache/*
+build
+zig-cache
+zig-out
