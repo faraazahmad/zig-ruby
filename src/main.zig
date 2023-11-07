@@ -11,7 +11,6 @@ pub fn main() !u8 {
     }
 
     const pm_version = prism.pm_version();
-    try stdout.print("pm_version: {s}\n", .{pm_version});
-    try stdout.print("hello: {s}\n", .{argv[1]});
+    try stdout.print("Hello from Prism C version: {s}\n", .{pm_version});
     return 0;
 }
